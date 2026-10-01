@@ -29,7 +29,10 @@ class Store:
 
     def overview(self) -> dict[str, object]:
         modules: list[dict[str, object]] = []
+        # 下划线开头的是模块内部表（如方案批件），不作为独立业务模块上看板
         for name in self.module_names():
+            if name.startswith("_"):
+                continue
             rows = self.rows(name)
             modules.append({
                 "name": name,
