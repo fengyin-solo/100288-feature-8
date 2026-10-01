@@ -30,6 +30,9 @@ class Store:
     def overview(self) -> dict[str, object]:
         modules: list[dict[str, object]] = []
         for name in self.module_names():
+            # 下划线后缀的是内部台账（如送审批次留痕），不算业务模块
+            if "_" in name:
+                continue
             rows = self.rows(name)
             modules.append({
                 "name": name,
